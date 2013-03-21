@@ -10,7 +10,7 @@
     <RootNamespace>Test.CSF</RootNamespace>
     <AssemblyName>Test.CSF</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <ReleaseVersion>2.4.0</ReleaseVersion>
+    <ReleaseVersion>2.4.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -110,6 +110,8 @@
     <Compile Include="Patterns\ServiceLayer\TestRequestExtensions.cs" />
     <Compile Include="TestStringExtensions.cs" />
     <Compile Include="Data\NHibernate\TestDefaultLinqWrapper.cs" />
+    <Compile Include="Collections\TestIEnumerableExtensions.cs" />
+    <Compile Include="TestEnumExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -155,6 +157,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Reflection\TestResource.txt">
       <LogicalName>TestResource.txt</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reflection\TestResourceType.txt">
+      <LogicalName>Test.CSF.Reflection.TestResourceType.txt</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
