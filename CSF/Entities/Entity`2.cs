@@ -715,59 +715,6 @@ namespace CSF.Entities
     #endregion
     
     #region static operator overloads
-    
-    /// <summary>
-    /// <para>Performs equality testing between two entity instances.</para>
-    /// </summary>
-    /// <remarks>
-    /// <para>This equality test does not require type equality between the objects to be compared.</para>
-    /// </remarks>
-    /// <param name="entity">
-    /// An entity instance.
-    /// </param>
-    /// <param name="obj">
-    /// An <see cref="IEntity"/>
-    /// </param>
-    /// <returns>
-    /// A <see cref="System.Boolean"/>
-    /// </returns>
-    [Obsolete("This method is obsolete and will be removed in v3.x.")]
-    public static bool operator ==(Entity<TEntity,TIdentity> entity, IEntity obj)
-    {
-      bool output;
-      
-      if((object) entity == null)
-      {
-        output = (obj == null);
-      }
-      else
-      {
-        output = entity.Equals(obj);
-      }
-      
-      return output;
-    }
-
-    /// <summary>
-    /// <para>Performs inequality testing between two entity instances.</para>
-    /// </summary>
-    /// <remarks>
-    /// <para>This equality test does not require type equality between the objects to be compared.</para>
-    /// </remarks>
-    /// <param name="entity">
-    /// An entity instance.
-    /// </param>
-    /// <param name="obj">
-    /// An <see cref="IEntity"/>
-    /// </param>
-    /// <returns>
-    /// A <see cref="System.Boolean"/>
-    /// </returns>
-    [Obsolete("This method is obsolete and will be removed in v3.x.")]
-    public static bool operator !=(Entity<TEntity,TIdentity> entity, IEntity obj)
-    {
-      return !(entity == obj);
-    }
 
     /// <summary>
     /// Determines equality between two entity instances.
@@ -782,9 +729,18 @@ namespace CSF.Entities
     {
       bool output;
 
-      if((object) objectA == null)
+      if(Object.ReferenceEquals(objectA, objectB))
       {
-        output = (object) objectB == null;
+        output = true;
+      }
+      else if((object) objectA == null || (object) objectB == null)
+      {
+        output = false;
+      }
+      else if(!objectA.Id.Equals(default(TIdentity))
+              && objectA.Id.Equals(objectB.Id))
+      {
+        output = true;
       }
       else
       {
@@ -804,6 +760,47 @@ namespace CSF.Entities
     /// An entity instance.
     /// </param>
     public static bool operator !=(Entity<TEntity,TIdentity> objectA, IEntity<TEntity,TIdentity> objectB)
+    {
+      return !(objectA == objectB);
+    }
+
+    /// <summary>
+    /// <para>Performs equality testing between two entity instances.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>This equality test does not require type equality between the objects to be compared.</para>
+    /// </remarks>
+    /// <param name="objectA">
+    /// An entity instance.
+    /// </param>
+    /// <param name="objectB">
+    /// An <see cref="IEntity"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Boolean"/>
+    /// </returns>
+    public static bool operator ==(Entity<TEntity,TIdentity> objectA, IEntity objectB)
+    {
+      IEntity<TEntity,TIdentity> typedB = objectB as IEntity<TEntity,TIdentity>;
+      return (objectA == typedB);
+    }
+
+    /// <summary>
+    /// <para>Performs inequality testing between two entity instances.</para>
+    /// </summary>
+    /// <remarks>
+    /// <para>This equality test does not require type equality between the objects to be compared.</para>
+    /// </remarks>
+    /// <param name="objectA">
+    /// An entity instance.
+    /// </param>
+    /// <param name="objectB">
+    /// An <see cref="IEntity"/>
+    /// </param>
+    /// <returns>
+    /// A <see cref="System.Boolean"/>
+    /// </returns>
+    public static bool operator !=(Entity<TEntity,TIdentity> objectA, IEntity objectB)
     {
       return !(objectA == objectB);
     }

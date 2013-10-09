@@ -22,6 +22,7 @@ using System;
 using CSF.Entities;
 using NUnit.Framework;
 using System.Collections.Generic;
+using Moq;
 
 namespace Test.CSF.Entities
 {
@@ -332,7 +333,7 @@ namespace Test.CSF.Entities
     }
 
     #endregion
-
+    
     #region testing event-bound reference lists via old API
 
     [Test]
@@ -495,6 +496,106 @@ namespace Test.CSF.Entities
       Assert.IsNotNull(propertyList, "Event bound orders nullability (post-switch)");
       Assert.AreEqual(1, propertyList.Count, "Event bound orders count (post-switch)");
       Assert.IsTrue(propertyList.Contains(order), "Event bound orders expected contained item (post-switch)");
+    }
+
+    #endregion
+
+    #region Operator interaction with Equals
+
+    [Test]
+    public void TestOperatorEqualsCompareWithSelf()
+    {
+      Mock<Person> mockPerson = new Mock<Person>() { CallBase = true };
+
+      Person
+        person1 = mockPerson.Object,
+        person2 = mockPerson.Object;
+
+      mockPerson.Setup(x => x.Equals(It.IsAny<Person>())).Returns(true);
+
+      Assert.IsTrue(person1 == person2, "Correct result");
+      mockPerson.Verify(x => x.Equals(It.IsAny<Person>()), Times.Never());
+    }
+
+    [Test]
+    public void TestOperatorEqualsCompareWithNull()
+    {
+      Mock<Person> mockPerson = new Mock<Person>() { CallBase = true };
+
+      Person
+        person1 = mockPerson.Object,
+        person2 = null;
+
+      mockPerson.Setup(x => x.Equals(It.IsAny<Person>())).Returns(false);
+
+      Assert.IsFalse(person1 == person2, "Correct result");
+      mockPerson.Verify(x => x.Equals(It.IsAny<Person>()), Times.Never());
+    }
+
+    [Test]
+    public void TestOperatorEqualsBothNull()
+    {
+      Mock<Person> mockPerson = new Mock<Person>() { CallBase = true };
+
+      Person
+        person1 = null,
+        person2 = null;
+
+      mockPerson.Setup(x => x.Equals(It.IsAny<Person>())).Returns(true);
+
+      Assert.IsTrue(person1 == person2, "Correct result");
+      mockPerson.Verify(x => x.Equals(It.IsAny<Person>()), Times.Never());
+    }
+
+    [Test]
+    public void TestOperatorEqualsIdsSame()
+    {
+      Mock<Person>
+        mockPerson1 = new Mock<Person>() { CallBase = true },
+        mockPerson2 = new Mock<Person>() { CallBase = true };
+
+      Person
+        person1 = mockPerson1.Object,
+        person2 = mockPerson2.Object;
+
+      mockPerson1.Setup(x => x.Equals(It.IsAny<Person>())).Returns(true);
+      mockPerson1.SetupGet(x => x.Id).Returns(4);
+      mockPerson1.SetupGet(x => x.HasIdentity).Returns(true);
+      mockPerson1.Setup(x => x.GetIdentity()).Returns(new Identity<Person, uint>(4));
+      mockPerson2.Setup(x => x.Equals(It.IsAny<Person>())).Returns(true);
+      mockPerson2.SetupGet(x => x.Id).Returns(4);
+      mockPerson2.SetupGet(x => x.HasIdentity).Returns(true);
+      mockPerson2.Setup(x => x.GetIdentity()).Returns(new Identity<Person, uint>(4));
+
+      Assert.IsTrue(person1 == person2, "Correct result");
+      mockPerson1.Verify(x => x.Equals(It.IsAny<Person>()), Times.Never());
+      mockPerson2.Verify(x => x.Equals(It.IsAny<Person>()), Times.Never());
+    }
+
+    [Test]
+    public void TestOperatorEqualsDownCast()
+    {
+      Mock<Person>
+        mockPerson1 = new Mock<Person>() { CallBase = true },
+        mockPerson2 = new Mock<Person>() { CallBase = true };
+
+      Person person1 = mockPerson1.Object;
+      IEntity person2 = mockPerson2.Object;
+
+#pragma warning disable 618
+      mockPerson1.Setup(x => x.Equals(It.IsAny<IEntity>())).Returns(true);
+      mockPerson1.SetupGet(x => x.Id).Returns(4);
+      mockPerson1.SetupGet(x => x.HasIdentity).Returns(true);
+      mockPerson1.Setup(x => x.GetIdentity()).Returns(new Identity<Person, uint>(4));
+      mockPerson2.Setup(x => x.Equals(It.IsAny<Person>())).Returns(true);
+      mockPerson2.SetupGet(x => x.Id).Returns(4);
+      mockPerson2.SetupGet(x => x.HasIdentity).Returns(true);
+      mockPerson2.Setup(x => x.GetIdentity()).Returns(new Identity<Person, uint>(4));
+
+      Assert.IsTrue(person1 == person2, "Correct result");
+      mockPerson1.Verify(x => x.Equals(It.IsAny<IEntity>()), Times.Never());
+      mockPerson2.Verify(x => x.Equals(It.IsAny<Person>()), Times.Never());
+#pragma warning restore 618
     }
 
     #endregion
