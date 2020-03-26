@@ -58,17 +58,10 @@
     <Compile Include="AutoMoqDataAttribute.cs" />
     <Compile Include="TestInt32Extensions.cs" />
     <Compile Include="IO\TestFileSystemInfoExtensions.cs" />
-    <Compile Include="TestFraction.cs" />
-    <Compile Include="TestPrimeFactoriser.cs" />
-    <Compile Include="TestVersionExtensions.cs" />
     <Compile Include="TestDateTimeEqualityComparer.cs" />
-    <Compile Include="Collections\TestOrderNeutralEqualityComparer.cs" />
     <Compile Include="TestDateTimeExtensions.cs" />
     <Compile Include="Globalization\TestCultureInfoExtensions.cs" />
     <Compile Include="TestNullSafe.cs" />
-    <Compile Include="Collections\TestIDictionaryExtensions.cs" />
-    <Compile Include="TestStringExtensions.cs" />
-    <Compile Include="Collections\TestIEnumerableExtensions.cs" />
     <Compile Include="TestEnumExtensions.cs" />
     <Compile Include="TestBinaryGuidCombStrategy.cs" />
     <Compile Include="TestGuidExtensions.cs" />
