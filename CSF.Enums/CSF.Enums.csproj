@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard1.0;net45</TargetFrameworks>
+    <ReleaseVersion>6.1.1</ReleaseVersion>
+    <RootNamespace>CSF</RootNamespace>
+  </PropertyGroup>
+
+  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
+</Project>

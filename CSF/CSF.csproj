@@ -47,7 +47,6 @@
     <Compile Include="DateTimeEqualityComparer.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="NullSafe.cs" />
-    <Compile Include="EnumExtensions.cs" />
     <Compile Include="IGuidGenerationStrategy.cs" />
     <Compile Include="DefaultGuidStrategy.cs" />
     <Compile Include="BinaryGuidCombStrategy.cs" />
