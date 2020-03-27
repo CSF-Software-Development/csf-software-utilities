@@ -1,5 +1,5 @@
 //
-// DefaultGuidStrategy.cs
+// IGuidGenerationStrategy.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
@@ -28,22 +28,15 @@ using System;
 
 namespace CSF
 {
-  /// <summary>
-  /// Default implementation of <see cref="IGuidGenerationStrategy"/> that generates default GUIDs.
-  /// </summary>
-  public class DefaultGuidStrategy : IGuidGenerationStrategy
-  {
-    #region methods
-
     /// <summary>
-    ///  Generate a new GUID using the current strategy. 
+    /// A service which can provide <see cref="Guid"/> instances.
     /// </summary>
-    public virtual Guid Generate()
+    public interface IGetsGuid
     {
-      return Guid.NewGuid();
+        /// <summary>
+        /// Gets a new <see cref="Guid"/> instance.
+        /// </summary>
+        Guid GetGuid();
     }
-
-    #endregion
-  }
 }
 

@@ -2,17 +2,20 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.0;net45</TargetFrameworks>
-    <ReleaseVersion>6.1.1</ReleaseVersion>
     <RootNamespace>CSF</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DocumentationFile>bin\Debug\$(TargetFramework)\CSF.Enums.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\$(TargetFramework)\CSF.Guids.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>
-    <DocumentationFile>bin\Release\$(TargetFramework)\CSF.Enums.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\$(TargetFramework)\CSF.Guids.xml</DocumentationFile>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
   <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
+
 </Project>
