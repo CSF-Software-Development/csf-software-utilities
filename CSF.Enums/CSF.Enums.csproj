@@ -6,5 +6,13 @@
     <RootNamespace>CSF</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>bin\Debug\netstandard2.0\CSF.Enums.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <DocumentationFile>bin\Release\netstandard2.0\CSF.Enums.xml</DocumentationFile>
+  </PropertyGroup>
   <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
 </Project>
