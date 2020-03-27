@@ -99,16 +99,5 @@ namespace CSF
 
             throw new InvalidOperationException("Unsupported enum underlying type (theoretically impossible).");
         }
-
-        static ulong GetNumericValue<T>(T enumValue) where T : struct
-        {
-            var underlying = Enum.GetUnderlyingType(typeof(T));
-            var numeric = Convert.ChangeType(enumValue, underlying);
-
-            if (underlying == typeof(ulong)) return (ulong)numeric;
-
-            var longValue = (long)Convert.ChangeType(numeric, typeof(long));
-            return (ulong)Math.Abs(longValue);
-        }
     }
 }
