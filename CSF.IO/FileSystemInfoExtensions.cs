@@ -27,10 +27,11 @@
 using System;
 using System.IO;
 
-namespace CSF.IO
+namespace CSF
 {
     /// <summary>
-    /// Extension methods for <see cref="FileSystemInfo"/>.
+    /// Extension methods for <see cref="FileSystemInfo"/> (most commonly <see cref="FileInfo"/>
+    /// and <see cref="DirectoryInfo"/>.
     /// </summary>
     public static class FileSystemInfoExtensions
     {
@@ -41,29 +42,45 @@ namespace CSF.IO
 #endif
 
         /// <summary>
-        /// Determines whether this instance is child of the specified directory.
+        /// <para>
+        /// Determines whether the specified <see cref="FileSystemInfo"/> is a child of (contained within) the
+        /// specified <see cref="DirectoryInfo"/>.
+        /// </para>
+        /// <para>
         /// Note that this is known to work for Windows or POSIX-style filesystems, but may fail on other
         /// more esoteric platforms.
+        /// </para>
         /// </summary>
         /// <returns>
         /// <c>true</c> if this instance is child of the specified directory; otherwise, <c>false</c>.
         /// </returns>
         /// <param name='info'>
-        /// The current <see cref="FileSystemInfo"/> instance.
+        /// An instance of <see cref="FileSystemInfo"/> to test whether or not it is contained within
+        /// the <paramref name="directory"/>.
         /// </param>
         /// <param name='directory'>
-        /// The directory to test against.
+        /// The directory for which to test whether the <paramref name="info"/> is contained.
         /// </param>
-        public static bool IsChildOf(this FileSystemInfo info, DirectoryInfo directory)
+        /// <exception cref='ArgumentNullException'>If either <paramref name="info"/> or <paramref name="directory"/> are null.</exception>
+        public static bool IsContainedWithin(this FileSystemInfo info, DirectoryInfo directory)
         {
+            if (info == null)
+                throw new ArgumentNullException(nameof(info));
+            if (directory == null)
+                throw new ArgumentNullException(nameof(directory));
+
             return info.FullName.StartsWith(directory.FullName, Comparison);
         }
 
         /// <summary>
+        /// <para>
         /// Gets a relative path that represents the current instance's relative path from a
-        /// given <paramref name="root"/>.
+        /// specified <paramref name="root"/> directory.
+        /// </para>
+        /// <para>
         /// Note that this is known to work for Windows or POSIX-style filesystems, but may fail on other
         /// more esoteric platforms.
+        /// </para>
         /// </summary>
         /// <returns>
         /// The relative path component.
@@ -74,9 +91,8 @@ namespace CSF.IO
         /// <param name='root'>
         /// The root directory from which to create the output
         /// </param>
-        /// <exception cref='ArgumentException'>
-        /// Is thrown if the current instance is not a child of the root directory.
-        /// </exception>
+        /// <exception cref='ArgumentNullException'>If either <paramref name="info"/> or <paramref name="root"/> are null.</exception>
+        /// <exception cref='ArgumentException'>If <paramref name="info"/> is not contained within <paramref name="root"/>.</exception>
         public static string GetRelativePath(this FileSystemInfo info, DirectoryInfo root)
         {
             if (info == null)
@@ -84,7 +100,7 @@ namespace CSF.IO
             if (root == null)
                 throw new ArgumentNullException(nameof(root));
 
-            if (!info.IsChildOf(root))
+            if (!info.IsContainedWithin(root))
             {
                 var message = $"The item '{info.FullName}' must be a child of the root directory '{root.FullName}'";
                 throw new ArgumentException(message, nameof(info));
@@ -94,17 +110,14 @@ namespace CSF.IO
         }
 
         /// <summary>
-        /// Gets the parent of the current instance, or null if the current instance is the root of its filesystem.
+        /// Gets the parent of the specified <see cref="FileSystemInfo"/>, or null if the
+        /// object is the root of its filesystem.
         /// </summary>
         /// <returns>
         /// The parent directory.
         /// </returns>
-        /// <param name='info'>
-        /// The current <see cref="FileSystemInfo"/> instance.
-        /// </param>
-        /// <exception cref='ArgumentNullException'>
-        /// Is thrown when an argument passed to a method is invalid because it is <see langword="null" /> .
-        /// </exception>
+        /// <param name='info'>A <see cref="FileSystemInfo"/></param>
+        /// <exception cref='ArgumentNullException'>If <paramref name="info"/> is null.</exception>
         public static DirectoryInfo GetParentDirectory(this FileSystemInfo info)
         {
             if (info == null)

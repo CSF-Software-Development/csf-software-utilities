@@ -26,7 +26,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CSF.IO
+namespace CSF
 {
     /// <summary>
     /// A service which can build up a filename and its extensions dynamically.

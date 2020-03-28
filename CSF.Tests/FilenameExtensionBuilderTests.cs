@@ -24,10 +24,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using CSF.IO;
+using CSF;
 using NUnit.Framework;
 
-namespace Test.CSF.IO
+namespace Test.CSF
 {
     [TestFixture]
     public class FilenameExtensionBuilderTests

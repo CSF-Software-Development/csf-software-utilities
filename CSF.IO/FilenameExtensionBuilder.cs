@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CSF.IO
+namespace CSF
 {
     /// <summary>
     /// A builder which may be used to perform advanced manipulations upon a filename and its extensions.
