@@ -81,7 +81,7 @@ namespace CSF
                 throw new ArgumentNullException(nameof(filename));
 
             var parts = filename.Split(extensionCharacter);
-            string baseName;
+            string baseFilename;
             IReadOnlyList<string> extensions;
 
             if (parts.Length == 0
@@ -93,16 +93,16 @@ namespace CSF
 
             if (parts[0].Length == 0 && parts[1].Length > 0)
             {
-                baseName = String.Concat(extensionCharacter, parts[1]);
+                baseFilename = String.Concat(extensionCharacter, parts[1]);
                 extensions = parts.Skip(2).ToArray();
             }
             else
             {
-                baseName = parts[0];
+                baseFilename = parts[0];
                 extensions = parts.Skip(1).ToArray();
             }
 
-            return new FilenameExtensionBuilder(baseName, extensions, extensionCharacter);
+            return new FilenameExtensionBuilder(baseFilename, extensions, extensionCharacter);
         }
     }
 }
