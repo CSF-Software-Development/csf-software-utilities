@@ -38,7 +38,7 @@ namespace CSF
         static readonly int[] ReorderingMap = new[] { 3, 2, 1, 0, 5, 4, 7, 6, 8, 9, 10, 11, 12, 13, 14, 15 };
 
         /// <summary>
-        /// Returns a byte array representing the given <c>System.Guid</c> in an RFC-4122 compliant format.
+        /// Returns a byte array representing the specified <see cref="Guid"/> in an RFC-4122 compliant format.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -60,15 +60,15 @@ namespace CSF
         /// </para>
         /// </remarks>
         /// <returns>
-        /// A byte array representation of the GUID, in RFC-4122 compliant form.
+        /// A byte array representation of the <see cref="Guid"/>, in RFC-4122 compliant form.
         /// </returns>
         /// <param name='guid'>
-        /// The GUID for which to get the byte array.
+        /// The <see cref="Guid"/> for which to get the byte array.
         /// </param>
-        public static byte[] ToRFC4122ByteArray(this Guid guid) => IsLittleEndian ? ReverseBytesForRFC4122(guid.ToByteArray()) : guid.ToByteArray();
+        public static byte[] ToRFC4122ByteArray(this Guid guid) => ReorderBytesForRFC4122(guid.ToByteArray());
 
         /// <summary>
-        /// Returns a <c>System.Guid</c>, created from the given RFC-4122 compliant byte array.
+        /// Returns a <see cref="Guid"/>, created from the specified RFC-4122 compliant byte array.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -90,17 +90,17 @@ namespace CSF
         /// </para>
         /// </remarks>
         /// <returns>
-        /// A GUID, created from the given byte array.
+        /// A <see cref="Guid"/>, created from the given byte array.
         /// </returns>
         /// <param name='guidBytes'>
-        /// A byte array representing a GUID, in RFC-4122 compliant form.
+        /// A byte array representing a <see cref="Guid"/>, in RFC-4122 compliant form.
         /// </param>
-        public static Guid ToRFC4122Guid(this byte[] guidBytes) => new Guid(IsLittleEndian ? ReverseBytesForRFC4122(guidBytes) : guidBytes);
+        public static Guid ToRFC4122Guid(this byte[] guidBytes) => new Guid(ReorderBytesForRFC4122(guidBytes));
 
         /// <summary>
         /// Gets a copy of a 16-byte array, where the bytes in blocks 0-3, 4-5 &amp; 6-7 are
-        /// reversed.  The bytes in the block 8-15 are left as they are. This is required to support
-        /// RFC-4122 GUIDs.
+        /// reversed.  The bytes in the block 8-15 are left as they are.  This allows us to transform
+        /// a <see cref="Guid"/> into an RFC-4122 UUID where we are executing on a little-endian environment.
         /// </summary>
         /// <returns>
         /// A copy of the original byte array, with the modifications.
@@ -108,12 +108,16 @@ namespace CSF
         /// <param name='bytes'>
         /// A byte array of length 16, representing a <see cref="Guid"/>.
         /// </param>
-        static byte[] ReverseBytesForRFC4122(byte[] bytes)
+        /// <param name="forceReorder">If <c>true</c> the the reordering of bytes is forced, even on a big-endian architecture.</param>
+        internal static byte[] ReorderBytesForRFC4122(byte[] bytes, bool forceReorder = false)
         {
             if (bytes == null)
                 throw new ArgumentNullException(nameof(bytes));
             if (bytes.Length != 16)
                 throw new ArgumentException($"A {nameof(Guid)} must have precisely 16 bytes.", nameof(bytes));
+
+            // No reordering needed on big-endian environments
+            if (!IsLittleEndian && !forceReorder) return bytes;
 
             return bytes
                 .Select((val, idx) => {

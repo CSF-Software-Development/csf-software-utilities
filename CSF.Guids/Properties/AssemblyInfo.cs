@@ -1,10 +1,10 @@
-//
-// DefaultGuidStrategy.cs
+﻿//
+// AssemblyInfo.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2015 CSF Software Limited
+// Copyright (c) 2020 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,20 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
+using System.Runtime.CompilerServices;
 
-namespace CSF
-{
-    /// <summary>
-    /// A strategy for generating <see cref="Guid"/> instances which uses the
-    /// default, built-in <see cref="Guid.NewGuid"/> method.
-    /// </summary>
-    public class DefaultGuidStrategy : IGetsGuid
-    {
-        /// <summary>
-        /// Gets a new <see cref="Guid"/> instance.
-        /// </summary>
-        public Guid GetGuid() => Guid.NewGuid();
-    }
-}
-
+[assembly: InternalsVisibleTo("CSF.Tests")]

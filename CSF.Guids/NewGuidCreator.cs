@@ -1,5 +1,5 @@
-﻿//
-// TestConfiguration.cs
+//
+// DefaultGuidStrategy.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
@@ -25,46 +25,24 @@
 // THE SOFTWARE.
 
 using System;
-using System.Configuration;
 
-namespace Test.CSF
+namespace CSF
 {
-  /// <summary>
-  /// Configuration related to the testing environment itself.
-  /// </summary>
-  public class TestConfiguration : ConfigurationSection
-  {
-    #region properties
-
     /// <summary>
-    /// Gets or sets a filesystem path to serve as the root for tests which require access to the filesystem.
+    /// A strategy for generating <see cref="Guid"/> instances which uses the
+    /// default, built-in <see cref="Guid.NewGuid"/> method.
     /// </summary>
-    /// <value>The filesystem testing root path.</value>
-    [ConfigurationProperty(@"FilesystemTestingRootPath", IsRequired = true)]
-    public virtual string FilesystemTestingRootPath
+    public class NewGuidCreator : IGetsGuid
     {
-      get {
-        return (string) this["FilesystemTestingRootPath"];
-      }
-      set {
-        this["FilesystemTestingRootPath"] = value;
-      }
+        /// <summary>
+        /// Gets a new <see cref="Guid"/> instance.
+        /// </summary>
+        public Guid GetGuid() => Guid.NewGuid();
+
+        /// <summary>
+        /// Gets a singleton/flyweight instance of this GUID strategy.
+        /// </summary>
+        public static readonly IGetsGuid Default = new NewGuidCreator();
     }
-
-    #endregion
-
-    #region methods
-
-    /// <summary>
-    /// Gets the root path for filesystem testing.
-    /// </summary>
-    /// <returns>The filesystem testing root path.</returns>
-    public System.IO.DirectoryInfo GetFilesystemTestingRootPath()
-    {
-      return new System.IO.DirectoryInfo(this.FilesystemTestingRootPath);
-    }
-
-    #endregion
-  }
 }
 

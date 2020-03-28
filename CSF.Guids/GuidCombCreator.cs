@@ -41,11 +41,12 @@ namespace CSF
     /// </para>
     /// <para>
     /// This work is mainly based on the article found at https://www.informit.com/articles/article.aspx?p=25862
-    /// and particularly this page: https://www.informit.com/articles/article.aspx?p=25862&seqNum=7
+    /// and particularly this page: https://www.informit.com/articles/article.aspx?p=25862&amp;seqNum=7
     /// </para>
     /// </remarks>
-    public class BinaryGuidCombStrategy : IGetsGuid
+    public class GuidCombCreator : IGetsGuid
     {
+        readonly IGetsGuid wrappedStrategy;
         readonly IGetsTimestamp timestampProvider;
         readonly int timestampByteCount;
         readonly bool
@@ -61,7 +62,7 @@ namespace CSF
         public Guid GetGuid()
         {
             var timestampBytes = GetMostSignificantTimestampBytes();
-            var guid = Guid.NewGuid();
+            var guid = wrappedStrategy.GetGuid();
             var guidBytes = useRFC4122ByteOrder? guid.ToRFC4122ByteArray() : guid.ToByteArray();
 
             var timestampBytesStartPosition = timestampBytesAtBeginning ? 0 : 16 - timestampByteCount;
@@ -89,7 +90,7 @@ namespace CSF
         bool ShouldReverseTimestampBytes() => timestampBytesBigEndian == systemIsLittleEndian;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinaryGuidCombStrategy"/> class.
+        /// Initializes a new instance of the <see cref="GuidCombCreator"/> class.
         /// </summary>
         /// <param name="timestampByteCount">The number of bytes of the timestamp to use, must be between 3 and 6. The default is 4.</param>
         /// <param name="timestampBytesAtBeginning">
@@ -109,11 +110,18 @@ namespace CSF
         /// A value indicating whether or not to use the RFC 4122 ordering for bytes (compliant with the UUID specification).
         /// The default is false.
         /// </param>
-        public BinaryGuidCombStrategy(int timestampByteCount = 4,
-                                      bool timestampBytesAtBeginning = true,
-                                      bool? timestampBytesBigEndian = null,
-                                      IGetsTimestamp timestampProvider = null,
-                                      bool useRFC4122ByteOrder = false)
+        /// <param name="wrappedStrategy">
+        /// An optional implementation of <see cref="IGetsGuid"/> to wrap.  If this parameter is provided then this class
+        /// becomes a decorator around the wrapped instance.  This class will post-process the <see cref="Guid"/> which is
+        /// created by the wrapped implementation and alter some of its bytes to be timestamp-based.
+        /// The default is <see cref="NewGuidCreator.Default"/>.
+        /// </param>
+        public GuidCombCreator(int timestampByteCount = 4,
+                               bool timestampBytesAtBeginning = true,
+                               bool? timestampBytesBigEndian = null,
+                               IGetsTimestamp timestampProvider = null,
+                               bool useRFC4122ByteOrder = false,
+                               IGetsGuid wrappedStrategy = null)
         {
             if (timestampByteCount < 3 || timestampByteCount > 6)
                 throw new ArgumentOutOfRangeException(nameof(timestampByteCount), "The number of timestamp-based bytes must be between 3 and 6");
@@ -123,6 +131,7 @@ namespace CSF
             this.timestampBytesBigEndian = timestampBytesBigEndian ?? !BitConverter.IsLittleEndian;
             this.timestampProvider = timestampProvider ?? UtcTimestampProvider.Default;
             this.useRFC4122ByteOrder = useRFC4122ByteOrder;
+            this.wrappedStrategy = wrappedStrategy ?? NewGuidCreator.Default;
         }
     }
 }
