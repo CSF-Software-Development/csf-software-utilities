@@ -1,10 +1,10 @@
-//
-// TestNullSafe.cs
+﻿//
+// ICreatesDirectory.cs
 //
 // Author:
 //       Craig Fowler <craig@csf-dev.com>
 //
-// Copyright (c) 2015 CSF Software Limited
+// Copyright (c) 2020 Craig Fowler
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,49 +23,21 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 using System;
-using CSF;
-using NUnit.Framework;
+using System.IO;
 
-namespace Test.CSF
+namespace CSF
 {
-  [TestFixture]
-  public class TestNullSafe
-  {
-    #region tests
-
-    [Test]
-    public void ConvertTo_returns_correct_result_for_ulong()
+    /// <summary>
+    /// An object which can create a directory on the filesystem.
+    /// </summary>
+    public interface ICreatesDirectory
     {
-      ulong? val = NullSafe.ConvertTo<ulong>("5");
-
-      Assert.IsTrue(val.HasValue);
-      Assert.AreEqual(5, val.Value);
+        /// <summary>
+        /// Create the specified directory.
+        /// </summary>
+        /// <param name="directory">The directory to create.</param>
+        /// <param name="recursive">If set to <c>true</c> then this operation is recursive, creating parent directories where required.</param>
+        void Create(DirectoryInfo directory, bool recursive = false);
     }
-
-    [Test]
-    public void ConvertTo_returns_correct_result_for_DateTime()
-    {
-      DateTime? val = NullSafe.ConvertTo<DateTime>("2012-10-19");
-
-      Assert.IsTrue(val.HasValue);
-      Assert.AreEqual(new DateTime(2012, 10, 19), val.Value);
-    }
-
-    [Test]
-    public void ConvertTo_returns_null_for_impossible_conversion()
-    {
-      int? val = NullSafe.ConvertTo<int>("foo");
-
-      Assert.IsFalse(val.HasValue);
-
-      val = NullSafe.ConvertTo<int>(null);
-
-      Assert.IsFalse(val.HasValue);
-    }
-
-    #endregion
-  }
 }
-

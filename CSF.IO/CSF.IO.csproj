@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard1.3;net45</TargetFrameworks>
+    <ReleaseVersion>6.1.1</ReleaseVersion>
+    <RootNamespace>CSF</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>bin\Debug\$(TargetFramework)\CSF.IO.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <DocumentationFile>bin\Release\$(TargetFramework)\CSF.IO.xml</DocumentationFile>
+  </PropertyGroup>
+  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
+</Project>

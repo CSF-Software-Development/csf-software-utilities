@@ -23,5 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CSF.Enums\CSF.Enums.csproj" />
     <ProjectReference Include="..\CSF.Guids\CSF.Guids.csproj" />
+    <ProjectReference Include="..\CSF.IO\CSF.IO.csproj" />
   </ItemGroup>
 </Project>

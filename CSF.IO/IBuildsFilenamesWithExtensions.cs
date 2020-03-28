@@ -28,27 +28,27 @@ using System.Collections.Generic;
 
 namespace CSF.IO
 {
-  /// <summary>
-  /// A service which can build up a filename and its extensions dynamically.
-  /// </summary>
-  public interface IBuildsFilenamesWithExtensions
-  {
     /// <summary>
-    /// Gets or sets the base filename (without any extensions).
+    /// A service which can build up a filename and its extensions dynamically.
     /// </summary>
-    /// <value>The filename.</value>
-    string BaseName { get; set; }
+    public interface IBuildsFilenamesWithExtensions
+    {
+        /// <summary>
+        /// Gets or sets the base filename (without any extensions).
+        /// </summary>
+        /// <value>The filename.</value>
+        string BaseName { get; set; }
 
-    /// <summary>
-    /// Gets an ordered collection of the extensions.  This collection is mutable; <c>null</c> extensions are ignored.
-    /// </summary>
-    /// <value>The extensions.</value>
-    IList<string> Extensions { get; }
+        /// <summary>
+        /// Gets an ordered collection of the extensions.  This collection is mutable; <c>null</c> extensions are ignored.
+        /// </summary>
+        /// <value>The extensions.</value>
+        IList<string> Extensions { get; }
 
-    /// <summary>
-    /// Converts the state of the current instance into a <c>System.String</c>.
-    /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="IBuildsFilenamesWithExtensions"/>.</returns>
-    string ToString();
-  }
+        /// <summary>
+        /// Converts the state of the current instance into a <c>System.String</c>.
+        /// </summary>
+        /// <returns>A <see cref="String"/> that represents the current <see cref="IBuildsFilenamesWithExtensions"/>.</returns>
+        string ToString();
+    }
 }

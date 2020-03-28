@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9F4F8BC0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Guids", "CSF.Guids\CSF.Guids.csproj", "{62E4E631-776A-4EA4-87F3-34682B353EB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.IO", "CSF.IO\CSF.IO.csproj", "{3320126D-49E2-494E-9B1E-3E3AF87F21D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{62E4E631-776A-4EA4-87F3-34682B353EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E4E631-776A-4EA4-87F3-34682B353EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62E4E631-776A-4EA4-87F3-34682B353EB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3320126D-49E2-494E-9B1E-3E3AF87F21D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3320126D-49E2-494E-9B1E-3E3AF87F21D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3320126D-49E2-494E-9B1E-3E3AF87F21D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3320126D-49E2-494E-9B1E-3E3AF87F21D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
