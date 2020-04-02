@@ -38,7 +38,7 @@ are not derived from the timestamp are left unaltered from the underlying Guid-g
 means that they are random.
 
 The timestamp bytes are based upon the most significant bytes of the [`DateTime.Ticks`] property.  This allows us to
-calculate how often the timestamp-based part of the COMB will 'roll over' to a new number, for the various permitted
+calculate how often the timestamp-based part of the COMB will 'roll over' to a new value, for the various permitted
 numbers of timestamp-based bytes:
 
 * **3 bytes**: Roughly every 27 ¾ hours
