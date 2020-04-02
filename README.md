@@ -30,6 +30,24 @@ instances, using [the 'COMB' algorithm], documented [in detail on this page] of 
 [the 'COMB' algorithm]: https://www.informit.com/articles/article.aspx?p=25862
 [in detail on this page]: https://www.informit.com/articles/article.aspx?p=25862&amp;seqNum=7
 
+### How many timestamp-based bytes should a COMB use?
+One of the configuration parameters for a GUID COMB is the number of bytes which should be derived from the timestamp,
+versus the number of bytes which should be random.  A `Guid` is 16-bytes long and the timestamp-based component in a
+COMB may be anything between 3 and 6 bytes inclusive.  *The default is 4 bytes from the timestamp*.  Any bytes which 
+are not derived from the timestamp are left unaltered from the underlying Guid-generation process; typically this
+means that they are random.
+
+The timestamp bytes are based upon the most significant bytes of the [`DateTime.Ticks`] property.  This allows us to
+calculate how often the timestamp-based part of the COMB will 'roll over' to a new number, for the various permitted
+numbers of timestamp-based bytes:
+
+* **3 bytes**: Roughly every 27 ¾ hours
+* **4 bytes**: Roughly every 7 minutes *(this is the default setting)*
+* **5 bytes**: Roughly every 1.7 seconds
+* **6 bytes**: Roughly every 0.0066 (or 1/150th) of a second
+
+[`DateTime.Ticks`]: https://docs.microsoft.com/en-us/dotnet/api/system.datetime.ticks
+
 ## [CSF.IO]
 The I/O package provides three extension methods (in the `CSF` namespace) relating to instances of `FileSystemInfo`,
 to perform common actions.  It also provides a builder object - [`FilenameExtensionBuilder`] - which may be used to
