@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45</TargetFrameworks>
-    <ReleaseVersion>6.1.1</ReleaseVersion>
+    <ReleaseVersion>7.0.0</ReleaseVersion>
     <RootNamespace>CSF</RootNamespace>
   </PropertyGroup>
 
