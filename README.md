@@ -25,6 +25,7 @@ as a 'normal' implementation, there is also a `[GuidCombCreator]` class availabl
 instances, using [the 'COMB' algorithm], documented [in detail on this page] of the linked article.
 
 [CSF.Guids]: https://www.nuget.org/packages/CSF.Guids/
+[GuidCombCreator]: https://github.com/csf-dev/CSF.Utils/blob/v7.0.0/CSF.Guids/GuidCombCreator.cs
 [an RFC-4122 UUID]: https://tools.ietf.org/html/rfc4122
 [the 'COMB' algorithm]: https://www.informit.com/articles/article.aspx?p=25862
 [in detail on this page]: https://www.informit.com/articles/article.aspx?p=25862&amp;seqNum=7
