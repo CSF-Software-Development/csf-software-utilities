@@ -22,7 +22,7 @@ endianness of the computer).
 
 Additionally, it provides an interface that defines a strategy by which `Guid` instances may be created.  As well
 as a 'normal' implementation, there is also a [`GuidCombCreator`] class available, which creates semi-sequential
-instances, using [the 'COMB' algorithm], documented [in detail on this page] of the linked article.
+instances, using [the 'COMB' algorithm], documented [in detail on this page] of the linked article (albeit a SQL implementation).
 
 [CSF.Guids]: https://www.nuget.org/packages/CSF.Guids/
 [`GuidCombCreator`]: https://github.com/csf-dev/CSF.Utils/blob/v7.0.0/CSF.Guids/GuidCombCreator.cs
