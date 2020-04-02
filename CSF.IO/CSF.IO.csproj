@@ -2,8 +2,20 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45</TargetFrameworks>
-    <ReleaseVersion>6.1.1</ReleaseVersion>
+    <ReleaseVersion>7.0.0</ReleaseVersion>
     <RootNamespace>CSF</RootNamespace>
+        
+    <PackageId>CSF.IO</PackageId>
+    <Authors>craigfowler</Authors>
+    <Description>Extension methods for commonly-used functionality relating to FileSystemInfo, plus a builder object to manipulate a filename extension.</Description>
+    <Version>$(ReleaseVersion)</Version>
+    <PackageVersion>$(ReleaseVersion)</PackageVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright 2020 - CSF Software Limited</Copyright>
+    <PackageProjectUrl>https://github.com/csf-dev/CSF.Utils</PackageProjectUrl>
+    <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

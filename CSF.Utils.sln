@@ -169,7 +169,7 @@ Global
 		$25.NamingStyle = PascalCase
 		$25.IncludeInstanceMembers = True
 		$25.IncludeStaticEntities = True
-		version = 6.1.1
+		version = 7.0.0
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{877290F5-27D4-42D2-817B-BA71087A9468} = {9F4F8BC0-10BC-4389-8D17-F73B0A048196}

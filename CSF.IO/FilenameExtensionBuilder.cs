@@ -51,7 +51,7 @@ namespace CSF
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:CSF.IO.FilenameExtensionBuilder"/> class.
+        /// Initializes a new instance of the <see cref="FilenameExtensionBuilder"/> class.
         /// </summary>
         /// <param name="baseName">Base name.</param>
         /// <param name="extensions">Extensions.</param>
