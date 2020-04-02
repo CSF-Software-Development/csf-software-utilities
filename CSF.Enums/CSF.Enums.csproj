@@ -4,6 +4,18 @@
     <TargetFrameworks>netstandard2.0;netstandard1.0;net45</TargetFrameworks>
     <ReleaseVersion>7.0.0</ReleaseVersion>
     <RootNamespace>CSF</RootNamespace>
+        
+    <PackageId>CSF.Enums</PackageId>
+    <Authors>craigfowler</Authors>
+    <Description>A number of extension methods to work with 'enum' instances and types more conveniently.</Description>
+    <Version>$(ReleaseVersion)</Version>
+    <PackageVersion>$(ReleaseVersion)</PackageVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright 2020 - CSF Software Limited</Copyright>
+    <PackageProjectUrl>https://github.com/csf-dev/CSF.Utils</PackageProjectUrl>
+    <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
