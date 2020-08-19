@@ -26,9 +26,9 @@
     <DebugType></DebugType>
     <DocumentationFile>bin\Release\$(TargetFramework)\CSF.Guids.xml</DocumentationFile>
   </PropertyGroup>
+    
   <ItemGroup>
-    <Compile Remove="Class1.cs" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework)' == 'net45'" />
   </ItemGroup>
-  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
 
 </Project>
