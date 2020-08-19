@@ -47,7 +47,7 @@ namespace CSF
         /// <param name="type">The type to check.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="type"/> is <c>null</c></exception>
         /// <exception cref="MustBeEnumException">If <paramref name="type"/> is not an enum</exception>
-        public static void AssertIsEnum(Type type)
+        public static void AssertIsEnum(this Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
             if (!type.GetTypeInfo().IsEnum) throw new MustBeEnumException($"The type {type.FullName} must be an enum.");

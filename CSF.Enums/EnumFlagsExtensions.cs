@@ -52,7 +52,7 @@ namespace CSF
         /// <exception cref="ArgumentNullException">If <paramref name="enumType"/> is <c>null</c></exception>
         /// <exception cref="MustBeEnumException">If <paramref name="enumType"/> is not an enum</exception>
         /// <exception cref="MustBeFlagsEnumException">If <paramref name="enumType"/> is not decorated with the <c>[Flags]</c> attribute</exception>
-        public static void AssertIsFlagsEnum(Type enumType)
+        public static void AssertIsFlagsEnum(this Type enumType)
         {
             EnumDefinitionExtensions.AssertIsEnum(enumType);
             if (enumType.GetTypeInfo().GetCustomAttribute<FlagsAttribute>() == null)
