@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.0;net45</TargetFrameworks>
     <RootNamespace>CSF</RootNamespace>
-    <ReleaseVersion>7.0.0</ReleaseVersion>
+    <ReleaseVersion>7.0.1</ReleaseVersion>
         
     <PackageId>CSF.Guids</PackageId>
     <Authors>craigfowler</Authors>
