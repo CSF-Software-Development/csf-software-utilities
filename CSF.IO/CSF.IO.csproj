@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45</TargetFrameworks>
-    <ReleaseVersion>7.0.0</ReleaseVersion>
+    <ReleaseVersion>7.0.1</ReleaseVersion>
     <RootNamespace>CSF</RootNamespace>
         
     <PackageId>CSF.IO</PackageId>
@@ -26,5 +26,8 @@
     <DebugType></DebugType>
     <DocumentationFile>bin\Release\$(TargetFramework)\CSF.IO.xml</DocumentationFile>
   </PropertyGroup>
-  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
+    
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" Condition="'$(TargetFramework)' == 'net45'" />
+  </ItemGroup>
 </Project>
